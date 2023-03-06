@@ -84,6 +84,11 @@ public class PlayerScript : MonoBehaviour
         {
             thirdnpcText.SetActive(false);
         }
+
+        if (other.gameObject.name == "Door" && haveKey)
+        {
+            Destroy(other.gameObject);
+        }
     }
 
     //picking up key and finishing game
@@ -94,6 +99,7 @@ public class PlayerScript : MonoBehaviour
             haveKey = true;
             Destroy(other.gameObject);
         }
+
 
         if (other.gameObject.name == "EndBush")
         {
