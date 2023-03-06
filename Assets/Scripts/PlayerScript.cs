@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -45,28 +46,50 @@ public class PlayerScript : MonoBehaviour
         rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
     }
 
-    //dialogue system
-    void OnCollisionEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.name == "orangeNPC")
         {
-            if (haveKey)
-            {
-                secondnpcText.SetActive(true);
-            }
-            else
-            {
-                firstnpcText.SetActive(true);
-            }
+           //Debug.Log(other.gameObject.name);
+            //if (Input.GetKeyDown(KeyCode.Space))
+           // {
+                if (haveKey)
+                {
+                    secondnpcText.SetActive(true);
+                }
+                else
+                {
+                    firstnpcText.SetActive(true);
+                }
+           // }
         }
 
         if (other.gameObject.name == "blueNPC")
         {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
                 thirdnpcText.SetActive(true);
+            }
+        }
+
+        if (other.gameObject.name == "Key")
+        {
+            haveKey = true;
+            Destroy(other.gameObject);
+        }
+
+        if(other.gameObject.name == "Door" && haveKey)
+        {
+            Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.name == "EndBush")
+        {
+            SceneManager.LoadScene(0);
         }
     }
 
-    void OnCollisionExit2D(Collision2D other)
+   void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.name == "orangeNPC")
         {
@@ -85,26 +108,6 @@ public class PlayerScript : MonoBehaviour
             thirdnpcText.SetActive(false);
         }
 
-        if (other.gameObject.name == "Door" && haveKey)
-        {
-            Destroy(other.gameObject);
-        }
-    }
-
-    //picking up key and finishing game
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.name == "Key")
-        {
-            haveKey = true;
-            Destroy(other.gameObject);
-        }
-
-
-        if (other.gameObject.name == "EndBush")
-        {
-            SceneManager.LoadScene(0);
-        }
     }
 
 }
