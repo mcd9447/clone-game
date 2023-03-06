@@ -15,6 +15,7 @@ public class PlayerScript : MonoBehaviour
     //sound
     public AudioSource mySource;
     public AudioClip keysound;
+    public AudioClip doorsound;
 
     Vector2 movement;
 
@@ -86,7 +87,9 @@ public class PlayerScript : MonoBehaviour
 
         if(other.gameObject.name == "Door" && haveKey)
         {
+            
             Destroy(other.gameObject);
+            mySource.PlayOneShot(doorsound);
         }
 
         if (other.gameObject.name == "EndBush")

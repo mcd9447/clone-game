@@ -2396,11 +2396,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 368d4c0e628324623bb3ac2cf6007c06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 2
   rb: {fileID: 1826948234}
   animator: {fileID: 1826948239}
   mySource: {fileID: 1826948240}
   keysound: {fileID: 8300000, guid: 0c3300d8570b54e00accd189c9082684, type: 3}
+  doorsound: {fileID: 8300000, guid: a72031049b0514ec7aa694162f181914, type: 3}
   firstnpcText: {fileID: 1683631612}
   secondnpcText: {fileID: 70177901}
   thirdnpcText: {fileID: 1995631615}
