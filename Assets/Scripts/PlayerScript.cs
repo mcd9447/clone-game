@@ -12,6 +12,10 @@ public class PlayerScript : MonoBehaviour
     public Rigidbody2D rb;
     public Animator animator;
 
+    //sound
+    public AudioSource mySource;
+    public AudioClip keysound;
+
     Vector2 movement;
 
     //do you have the key?
@@ -25,6 +29,7 @@ public class PlayerScript : MonoBehaviour
     {
         firstnpcText.SetActive(false);
         secondnpcText.SetActive(false);
+        //audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -51,8 +56,8 @@ public class PlayerScript : MonoBehaviour
         if (other.gameObject.name == "orangeNPC")
         {
            //Debug.Log(other.gameObject.name);
-            //if (Input.GetKeyDown(KeyCode.Space))
-           // {
+           if (Input.GetKeyDown(KeyCode.Space))
+           {
                 if (haveKey)
                 {
                     secondnpcText.SetActive(true);
@@ -61,7 +66,7 @@ public class PlayerScript : MonoBehaviour
                 {
                     firstnpcText.SetActive(true);
                 }
-           // }
+           }
         }
 
         if (other.gameObject.name == "blueNPC")
@@ -75,6 +80,7 @@ public class PlayerScript : MonoBehaviour
         if (other.gameObject.name == "Key")
         {
             haveKey = true;
+            mySource.PlayOneShot(keysound);
             Destroy(other.gameObject);
         }
 
