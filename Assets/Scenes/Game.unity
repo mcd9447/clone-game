@@ -1088,7 +1088,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.8000001, g: 0.8000001, b: 0.8000001, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2402,6 +2402,8 @@ MonoBehaviour:
   mySource: {fileID: 1826948240}
   keysound: {fileID: 8300000, guid: 0c3300d8570b54e00accd189c9082684, type: 3}
   doorsound: {fileID: 8300000, guid: a72031049b0514ec7aa694162f181914, type: 3}
+  npcsound: {fileID: 8300000, guid: 4292363e7e7a4447cb51e89886cbb5f9, type: 3}
+  finishsound: {fileID: 8300000, guid: cc8f11c6ad6e64eeeb266239edac0ca6, type: 3}
   firstnpcText: {fileID: 1683631612}
   secondnpcText: {fileID: 70177901}
   thirdnpcText: {fileID: 1995631615}

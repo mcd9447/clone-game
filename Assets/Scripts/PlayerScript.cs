@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,6 +17,8 @@ public class PlayerScript : MonoBehaviour
     public AudioSource mySource;
     public AudioClip keysound;
     public AudioClip doorsound;
+    public AudioClip npcsound;
+    public AudioClip finishsound;
 
     Vector2 movement;
 
@@ -62,10 +65,12 @@ public class PlayerScript : MonoBehaviour
                 if (haveKey)
                 {
                     secondnpcText.SetActive(true);
+                    mySource.PlayOneShot(npcsound);
                 }
                 else
                 {
                     firstnpcText.SetActive(true);
+                    mySource.PlayOneShot(npcsound);
                 }
            }
         }
@@ -75,6 +80,7 @@ public class PlayerScript : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 thirdnpcText.SetActive(true);
+                mySource.PlayOneShot(npcsound);
             }
         }
 
@@ -95,6 +101,7 @@ public class PlayerScript : MonoBehaviour
         if (other.gameObject.name == "EndBush")
         {
             SceneManager.LoadScene(0);
+            mySource.PlayOneShot(finishsound);
         }
     }
 
