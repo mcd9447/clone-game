@@ -18,12 +18,15 @@ public class PlayerScript : MonoBehaviour
     public AudioClip keysound;
     public AudioClip doorsound;
     public AudioClip npcsound;
-    public AudioClip finishsound;
+    
 
     Vector2 movement;
 
     //do you have the key?
     bool haveKey = false;
+
+    public float finished = GameManager.finishedGame;
+    bool won = false;
 
     public GameObject firstnpcText;
     public GameObject secondnpcText;
@@ -33,7 +36,7 @@ public class PlayerScript : MonoBehaviour
     {
         firstnpcText.SetActive(false);
         secondnpcText.SetActive(false);
-        //audioSource = GetComponent<AudioSource>();
+        thirdnpcText.SetActive(false);
     }
 
     void Update()
@@ -47,6 +50,12 @@ public class PlayerScript : MonoBehaviour
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
+        if (won)
+        {
+            finished += 1;
+            SceneManager.LoadScene(0);
+        }
+
     }
 
     private void FixedUpdate()
@@ -57,32 +66,7 @@ public class PlayerScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.name == "orangeNPC")
-        {
-           //Debug.Log(other.gameObject.name);
-           if (Input.GetKeyDown(KeyCode.Space))
-           {
-                if (haveKey)
-                {
-                    secondnpcText.SetActive(true);
-                    mySource.PlayOneShot(npcsound);
-                }
-                else
-                {
-                    firstnpcText.SetActive(true);
-                    mySource.PlayOneShot(npcsound);
-                }
-           }
-        }
-
-        if (other.gameObject.name == "blueNPC")
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                thirdnpcText.SetActive(true);
-                mySource.PlayOneShot(npcsound);
-            }
-        }
+        
 
         if (other.gameObject.name == "Key")
         {
@@ -100,22 +84,52 @@ public class PlayerScript : MonoBehaviour
 
         if (other.gameObject.name == "EndBush")
         {
-            SceneManager.LoadScene(0);
-            mySource.PlayOneShot(finishsound);
+            won = true;
         }
     }
 
-   void OnTriggerExit2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.name == "orangeNPC")
+        {
+            //Debug.Log(other.gameObject.name);
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (haveKey)
+                {
+                    secondnpcText.SetActive(true);
+                    mySource.PlayOneShot(npcsound);
+                }
+                else
+                {
+                    firstnpcText.SetActive(true);
+                    mySource.PlayOneShot(npcsound);
+                }
+            }
+        }
+      
+
+        if (other.gameObject.name == "blueNPC")
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                thirdnpcText.SetActive(true);
+                mySource.PlayOneShot(npcsound);
+            }
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.name == "orangeNPC")
         {
             if (haveKey)
             {
-                thirdnpcText.SetActive(false);
+                secondnpcText.SetActive(false);
             }
             else
             {
-                thirdnpcText.SetActive(false);
+                firstnpcText.SetActive(false);
             }
         }
 
